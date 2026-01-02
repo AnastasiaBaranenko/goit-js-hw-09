@@ -1,4 +1,4 @@
-const formData = { email: '', message: '' };
+let formData = { email: '', message: '' };
 
 const form = document.querySelector('.feedback-form');
 const keyForm = 'feedback-form-state';
@@ -14,14 +14,15 @@ function onFormInput(event) {
 
 function onFormSubmit(event) {
   event.preventDefault();
+
   if (formData.email == '' || formData.message == '') {
     alert(`Fill please all fields`);
   } else {
     console.log(formData);
+    form.reset();
+    formData = Object.fromEntries(new FormData(form));
+    localStorage.removeItem(keyForm);
   }
-  form.reset();
-
-  localStorage.removeItem(keyForm);
 }
 
 function textData() {
